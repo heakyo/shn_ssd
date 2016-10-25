@@ -1,0 +1,16 @@
+# EXTRA_CFLAGS	+= -DDEBUG
+# EXTRA_CFLAGS 	+= -DHANDLE_INLINE_ISR
+
+ifneq ($(KERNELRELEASE), )
+	shannon_cdev-y := shannon-cdev.o
+	obj-m += shannon_cdev.o
+else
+	KERNELDIR ?= /lib/modules/`uname -r`/build
+#	KERNELDIR ?= /home/david/git/linux/
+	PWD := `pwd`
+target:
+	$(MAKE) -C $(KERNELDIR) M=$(PWD) modules
+endif
+	
+clean:
+	rm -rf *.o .depend .*.cmd *.ko *.mod.c *.order *.symvers .tmp_versions *.unsigned *.markers
