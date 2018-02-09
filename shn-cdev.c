@@ -251,8 +251,7 @@ static int __init shannon_init(void)
 {
 	printk("%s\n",__func__);
 
-	pci_register_driver(&shn_cdev_pci_driver);	
-	return 0;
+	return pci_register_driver(&shn_cdev_pci_driver);
 }
 
 static void __exit shannon_exit(void)
